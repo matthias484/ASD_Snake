@@ -5,13 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
 
@@ -112,58 +110,50 @@ public class HighScoreService {
     }
 
     /**
-     * This method checks if there are past high scores saved in the high scores file.
-     * If there are no entries, it will write the name of the player in it.
-     * If there are more than five high scores saved, only the five highest scores will be displayed and saved.
+     * This method saves the high score of the current player.
+     * It retrieves the list of saved players from the high scores file,
+     * adds the current player to the list, and then writes the updated list back to the file.
+     * Only the top five players by score are saved.
      * An error message will be created if the file can not be read or the path to it is wrong.
      *
-     * @param currentPlayer The player to save the current player.
+     * @param currentPlayer The current player whose high score is to be saved.
      */
-    public static void savePlayerHighscore(Player currentPlayer) {
-
+    public static void savePlayerHighScore(Player currentPlayer) {
         try {
             File highscoreFile = getHighScoresFile();
             List<String> fileContent = getFileContent(highscoreFile);
             List<Player> players = getPlayerFromList(fileContent);
 
-            if (!players.isEmpty()) {
-                players.add(currentPlayer);
+            players.add(currentPlayer);
 
-                players = players.stream()
-                        .sorted(Comparator.comparingInt(Player::getScore).reversed())
-                        .collect(Collectors.toList());
-
-                if (players.size() > 5) {
-                    Player previousLastPlayer = players.get(players.size() - 2);
-                    Player lastPlayer = players.get(players.size() - 1);
-
-                    if (lastPlayer.equals(currentPlayer) &&
-                            lastPlayer.getScore() == previousLastPlayer.getScore()) {
-                        players.remove(previousLastPlayer);
-                    } else players.remove(lastPlayer);
-                }
-            } else {
-                players.add(currentPlayer);
-            }
-
-            try (FileWriter fileWriter = new FileWriter(highscoreFile)) {
-                fileWriter.write("");
-                StringBuilder sb = new StringBuilder();
-                for (Player player : players) {
-                    sb.append(player.getName());
-                    sb.append(HIGHSCORE_SEPARATOR);
-                    sb.append(player.getScore());
-
-                    fileWriter.append(sb);
-                    fileWriter.append(System.lineSeparator());
-                    sb.setLength(0);
-                }
-            }
-
+            List<String> topFivePlayersByScoreAsHighScoreStringList = getTopFivePlayersByScoreAsHighScoreStringList(players);
+            Files.write(highscoreFile.toPath(), topFivePlayersByScoreAsHighScoreStringList);
         } catch (IOException ex) {
-            LOG.error("Error while saving the players list");
-            ex.printStackTrace();
+            LOG.error("Error while saving the players list", ex);
         }
     }
 
+    /**
+     * This method sorts the list of players in descending order by score and selects the top five.
+     * Each player is then converted to a string in the format "name%%%score".
+     *
+     * @param players The list of Player objects to be processed.
+     * @return A list of strings representing the top five players by score.
+     */
+    private static List<String> getTopFivePlayersByScoreAsHighScoreStringList(List<Player> players) {
+        return players.stream()
+                .sorted(sortByScoreDescending())
+                .limit(5)
+                .map(Player::toHighScoreString)
+                .toList();
+    }
+
+    /**
+     * This method creates a comparator for Player objects that sorts them in descending order by score.
+     *
+     * @return A Comparator for Player objects.
+     */
+    private static Comparator<Player> sortByScoreDescending() {
+        return Comparator.comparingInt(Player::getScore).reversed();
+    }
 }
