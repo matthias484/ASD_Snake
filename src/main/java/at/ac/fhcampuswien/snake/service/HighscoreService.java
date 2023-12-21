@@ -24,7 +24,7 @@ public class HighscoreService {
 
     }
 
-    private final static Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
 
     /**
      * This method looks for an existing high score file on disk. If it does not exist - it creates one.
