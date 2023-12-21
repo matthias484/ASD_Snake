@@ -4,7 +4,7 @@ import at.ac.fhcampuswien.snake.ingameobjects.Food;
 import at.ac.fhcampuswien.snake.ingameobjects.Position;
 import at.ac.fhcampuswien.snake.ingameobjects.Snake;
 import at.ac.fhcampuswien.snake.ingameobjects.Wall;
-import at.ac.fhcampuswien.snake.service.HighscoreService;
+import at.ac.fhcampuswien.snake.service.HighScoreService;
 import at.ac.fhcampuswien.snake.util.Player;
 import at.ac.fhcampuswien.snake.util.SoundFX;
 import at.ac.fhcampuswien.snake.util.StateManager;
@@ -429,7 +429,7 @@ public class GameBoard {
         }
 
         Player player = new Player(name, score);
-        HighscoreService.savePlayerHighscore(player);
+        HighScoreService.savePlayerHighscore(player);
     }
 
     /**

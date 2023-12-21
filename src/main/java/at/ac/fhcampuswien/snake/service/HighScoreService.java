@@ -18,14 +18,14 @@ import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
 /**
  * Utility Class to read from and save to a text file that stores the high scores.
  */
-public class HighscoreService {
+public class HighScoreService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HighScoreService.class);
 
     /**
      * Private constructor to hide the implicit public one.
      */
-    private HighscoreService() {
+    private HighScoreService() {
 
     }
 
@@ -36,11 +36,11 @@ public class HighscoreService {
      * @return A File object that represents the high scores file.
      * @throws IOException if an I/O error occurs when creating the high scores file.
      */
-    private static File getHighscoresFile() throws IOException {
+    private static File getHighScoresFile() throws IOException {
         String path = "src/main/resources/highScores.txt";
         File highScoreFile = new File(path);
         if (!highScoreFile.exists()) {
-            createHighscoresFile(highScoreFile);
+            createHighScoresFile(highScoreFile);
         }
         return highScoreFile;
     }
@@ -52,7 +52,7 @@ public class HighscoreService {
      * @param highScoreFile A File object representing the high scores file to be created.
      * @throws IOException if the file cannot be created.
      */
-    private static void createHighscoresFile(File highScoreFile) throws IOException {
+    private static void createHighScoresFile(File highScoreFile) throws IOException {
         boolean fileCreated = highScoreFile.createNewFile();
         if (!fileCreated) {
             throw new IOException("Could not create new high score file.");
@@ -91,18 +91,23 @@ public class HighscoreService {
         return new ArrayList<>(unmodifiableList);
     }
 
+    /**
+     * This method retrieves the list of saved players from the high scores file.
+     * It reads the file content and converts each line into a Player object.
+     *
+     * @return A list of Player objects representing the saved players.
+     *         Returns null if an I/O error occurs when reading the file content.
+     */
     public static List<Player> getSavedPlayerList() {
-        List<Player> ret = null;
-
+        List<Player> savedPlayerList = null;
         try {
-            File highscoreFile = getHighscoresFile();
-            List<String> fileContent = getFileContent(highscoreFile);
-            ret = getPlayerFromList(fileContent);
+            File highScoreFile = getHighScoresFile();
+            List<String> fileContent = getFileContent(highScoreFile);
+            savedPlayerList = getPlayerFromList(fileContent);
         } catch (IOException ex) {
-            LOG.error("Error getting the saved players list");
-            ex.printStackTrace();
+            LOG.error("Error getting the saved players list", ex);
         }
-        return ret;
+        return savedPlayerList;
     }
 
     /**
@@ -116,7 +121,7 @@ public class HighscoreService {
     public static void savePlayerHighscore(Player currentPlayer) {
 
         try {
-            File highscoreFile = getHighscoresFile();
+            File highscoreFile = getHighScoresFile();
             List<String> fileContent = getFileContent(highscoreFile);
             List<Player> players = getPlayerFromList(fileContent);
 
