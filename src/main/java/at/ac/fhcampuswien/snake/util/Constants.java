@@ -15,7 +15,8 @@ public class Constants {
     public static final int HIGHSCORE_BOARD_NAME_COL_WIDTH = HIGHSCORE_BOARD_WIDTH - 125;
     public static final int HIGHSCORE_BOARD_SCORE_COL_WIDTH = 100;
 
-    public static final int APP_HEIGHT_MEDIUM = GAME_BOARD_SIZE_MEDIUM + SCOREBOARD_HEIGHT + 25; // + 25 for menu bar
+    public static final int APP_MENU_BAR = 25;
+    public static final int APP_HEIGHT_MEDIUM = GAME_BOARD_SIZE_MEDIUM + SCOREBOARD_HEIGHT + APP_MENU_BAR;
     public static final int APP_WIDTH_MEDIUM = GAME_BOARD_SIZE_MEDIUM;
 
     public static final int NUMBER_OF_ROWS_AND_COLS = 20;
