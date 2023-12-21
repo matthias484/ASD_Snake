@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -57,27 +58,19 @@ public class HighscoreService {
     }
 
     /**
-     * This method reads every line from the file and stores it in a list.
+     * This method reads every line from the provided file and stores it in a list.
      *
      * @param file The file to read from.
-     * @return List of strings where each row represents a line in the file.
+     * @return List of strings where each string represents a line in the file.
+     * @throws IOException if an I/O error occurs when reading the file content.
      */
-    private static List<String> getFileContent(File file) throws IOException{
-        List<String> ret = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                ret.add(line);
-            }
-
+    private static List<String> getFileContent(File file) throws IOException {
+        try {
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
             LOG.error("Error reading the file content");
             throw new IOException(e);
         }
-
-        return ret;
     }
 
     /**
