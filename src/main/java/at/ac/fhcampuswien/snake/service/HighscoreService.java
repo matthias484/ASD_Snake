@@ -17,6 +17,13 @@ import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
  */
 public class HighscoreService {
 
+    /**
+     * Private constructor to hide the implicit public one.
+     */
+    private HighscoreService() {
+
+    }
+
     private final static Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
 
     /**
