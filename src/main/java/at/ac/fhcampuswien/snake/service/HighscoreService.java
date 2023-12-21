@@ -4,7 +4,9 @@ import at.ac.fhcampuswien.snake.util.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -74,22 +76,19 @@ public class HighscoreService {
     }
 
     /**
-     * This method reads the entries in the saved file and splits it according to the defined separator.
+     * This method takes a list of strings, where each string represents a line from the high scores file.
+     * Each line is split into parts using the high score separator.
+     * Each part is then used to create a new Player object.
      *
-     * @param list The list that contains the previous high score data.
-     * @return List of players and there score.
+     * @param highScoreList The list of strings to be processed.
+     * @return A list of Player objects created from the provided list of strings.
      */
-    private static List<Player> getPlayerFromList(List<String> list) {
-        List<Player> ret = new ArrayList<>();
-
-        if (!list.isEmpty()) {
-            for (String line : list) {
-                String[] parts = line.split(HIGHSCORE_SEPARATOR);
-                Player player = new Player(parts[0], Integer.parseInt(parts[1]));
-                ret.add(player);
-            }
-        }
-        return ret;
+    private static List<Player> getPlayerFromList(List<String> highScoreList) {
+        List<Player> unmodifiableList = highScoreList.stream()
+                .map(line -> line.split(HIGHSCORE_SEPARATOR))
+                .map(parts -> new Player(parts[0], Integer.parseInt(parts[1])))
+                .toList();
+        return new ArrayList<>(unmodifiableList);
     }
 
     public static List<Player> getSavedPlayerList() {
