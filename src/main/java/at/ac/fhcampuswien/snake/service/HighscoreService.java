@@ -17,6 +17,8 @@ import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
  */
 public class HighscoreService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
+
     /**
      * Private constructor to hide the implicit public one.
      */
@@ -24,19 +26,34 @@ public class HighscoreService {
 
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(HighscoreService.class);
-
     /**
-     * This method looks for an existing high score file on disk. If it does not exist - it creates one.
+     * This method checks if a high scores file exists in the specified path.
+     * If the file does not exist, it creates a new one.
      *
-     * @return file object that points to the file on disk.
-     * @throws IOException if the program can not read from file / process gets interrupted.
+     * @return A File object that represents the high scores file.
+     * @throws IOException if an I/O error occurs when creating the high scores file.
      */
     private static File getHighscoresFile() throws IOException {
-        String path = "src/main/resources/highscores.txt";
-        File highscoreFile = new File(path);
-        highscoreFile.createNewFile();
-        return highscoreFile;
+        String path = "src/main/resources/highScores.txt";
+        File highScoreFile = new File(path);
+        if (!highScoreFile.exists()) {
+            createHighscoresFile(highScoreFile);
+        }
+        return highScoreFile;
+    }
+
+    /**
+     * This method creates a new high scores file.
+     * If the file cannot be created, it throws an IOException.
+     *
+     * @param highScoreFile A File object representing the high scores file to be created.
+     * @throws IOException if the file cannot be created.
+     */
+    private static void createHighscoresFile(File highScoreFile) throws IOException {
+        boolean fileCreated = highScoreFile.createNewFile();
+        if (!fileCreated) {
+            throw new IOException("Could not create new high score file.");
+        }
     }
 
     /**
