@@ -85,6 +85,7 @@ public class HighScoreService {
      */
     private static List<Player> getPlayerFromList(List<String> highScoreList) {
         List<Player> unmodifiableList = highScoreList.stream()
+                .filter(line -> line.contains(HIGHSCORE_SEPARATOR))
                 .map(line -> line.split(HIGHSCORE_SEPARATOR))
                 .map(parts -> new Player(parts[0], Integer.parseInt(parts[1])))
                 .toList();
