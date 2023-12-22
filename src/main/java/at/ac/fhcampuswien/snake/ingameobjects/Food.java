@@ -78,8 +78,8 @@ public class Food {
             // Check if calculated Position is inhibited by the snake
             int i = 0;
             do {
-                if (snake.getSegments().get(i).getX() == foodXCoord &&
-                        snake.getSegments().get(i).getY() == foodYCoord) isTargetFieldFree = false;
+                if (snake.getSegments().get(i).x() == foodXCoord &&
+                        snake.getSegments().get(i).y() == foodYCoord) isTargetFieldFree = false;
                 i++;
             } while (isTargetFieldFree && i < snake.getSegments().size());
 
@@ -87,8 +87,8 @@ public class Food {
             if (wall != null && isTargetFieldFree) {
                 int j = 0;
                 do {
-                    if (wall.getSegments().get(j).getX() == foodXCoord &&
-                            wall.getSegments().get(j).getY() == foodYCoord) isTargetFieldFree = false;
+                    if (wall.getSegments().get(j).x() == foodXCoord &&
+                            wall.getSegments().get(j).y() == foodYCoord) isTargetFieldFree = false;
                     j++;
                 } while (isTargetFieldFree && j < wall.getSegments().size());
             }
@@ -96,7 +96,7 @@ public class Food {
             // Check if currently existing regular Food is on desired Position
             if (isSpecialFood && currentlyExistingRegularFood != null && isTargetFieldFree) {
                 Position existingFoodPos = currentlyExistingRegularFood.getLocation();
-                if (existingFoodPos.getX() == foodXCoord && existingFoodPos.getY() == foodYCoord) {
+                if (existingFoodPos.x() == foodXCoord && existingFoodPos.y() == foodYCoord) {
                     isTargetFieldFree = false;
                 }
             }
