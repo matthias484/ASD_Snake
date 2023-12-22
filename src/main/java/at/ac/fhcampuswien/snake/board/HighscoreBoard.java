@@ -16,7 +16,7 @@ import static at.ac.fhcampuswien.snake.util.Constants.*;
 
 public class HighscoreBoard {
 
-    private VBox vBox;
+    private final VBox vBox;
     private TableView<Player> table;
 
     public HighscoreBoard(VBox vBox) {
