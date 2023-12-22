@@ -15,7 +15,8 @@ public class Constants {
     public static final int HIGHSCORE_BOARD_NAME_COL_WIDTH = HIGHSCORE_BOARD_WIDTH - 125;
     public static final int HIGHSCORE_BOARD_SCORE_COL_WIDTH = 100;
 
-    public static final int APP_HEIGHT_MEDIUM = GAME_BOARD_SIZE_MEDIUM + SCOREBOARD_HEIGHT + 25; // + 25 for menu bar
+    public static final int APP_MENU_BAR_HEIGHT = 25;
+    public static final int APP_HEIGHT_MEDIUM = GAME_BOARD_SIZE_MEDIUM + SCOREBOARD_HEIGHT + APP_MENU_BAR_HEIGHT;
     public static final int APP_WIDTH_MEDIUM = GAME_BOARD_SIZE_MEDIUM;
 
     public static final int NUMBER_OF_ROWS_AND_COLS = 20;
@@ -24,8 +25,8 @@ public class Constants {
     public static final String GAMEBOARD_COLOR_LIGHT = "FFCC66";
     public static final String GAMEBOARD_COLOR_DARK = "CC9933";
 
-    public final static int INITIAL_SIZE = 4;
-    public final static Direction INITIAL_DIRECTION = Direction.RIGHT;
+    public static final int INITIAL_SIZE = 4;
+    public static final Direction INITIAL_DIRECTION = Direction.RIGHT;
 
     public enum Direction {
         LEFT, RIGHT, UP, DOWN

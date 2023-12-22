@@ -1,6 +1,6 @@
 package at.ac.fhcampuswien.snake.board;
 
-import at.ac.fhcampuswien.snake.service.HighscoreService;
+import at.ac.fhcampuswien.snake.service.HighScoreService;
 import at.ac.fhcampuswien.snake.util.Player;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,7 +40,7 @@ public class HighscoreBoard {
         vBox.setPadding(new Insets(10, 10, 10, 10));
         vBox.getChildren().addAll(table);
 
-        final List<Player> playerList = HighscoreService.getSavedPlayerList();
+        final List<Player> playerList = HighScoreService.getSavedPlayerList();
         final ObservableList<Player> data = FXCollections.observableArrayList(playerList);
 
         nameCol.setStyle("-fx-alignment: CENTER;");

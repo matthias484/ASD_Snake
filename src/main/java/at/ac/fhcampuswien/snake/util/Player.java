@@ -3,6 +3,8 @@ package at.ac.fhcampuswien.snake.util;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
+
 public class Player {
     private final SimpleStringProperty name;
     private final SimpleIntegerProperty score;
@@ -18,5 +20,9 @@ public class Player {
 
     public int getScore() {
         return score.get();
+    }
+
+    public String toHighScoreString() {
+        return name.get() + HIGHSCORE_SEPARATOR + score.get();
     }
 }
