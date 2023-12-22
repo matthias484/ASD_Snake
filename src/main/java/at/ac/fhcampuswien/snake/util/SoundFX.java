@@ -1,11 +1,15 @@
 package at.ac.fhcampuswien.snake.util;
 
 import javafx.scene.media.AudioClip;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URISyntaxException;
 import java.util.Objects;
 
 public class SoundFX {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SoundFX.class);
 
     private static final String INTRO_SOUND = "/sounds/game-intro.wav";
     private static final String BONUS_POINT_SOUND = "/sounds/bonus-point.wav";
@@ -38,8 +42,8 @@ public class SoundFX {
             AudioClip audioClip = new AudioClip(path);
             audioClip.play();
 
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
+        } catch (URISyntaxException ex) {
+            LOG.error("Error while playing sound", ex);
         }
     }
 }
