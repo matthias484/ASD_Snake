@@ -17,11 +17,11 @@ public class GameOverController {
     private VBox highScoreTable;
 
 
-    public void playNewGame(ActionEvent actionEvent) throws IOException {
+    public void playNewGame() throws IOException {
         StateManager.switchToGameView();
     }
 
-    public void goToMainMenu(ActionEvent actionEvent) throws IOException {
+    public void goToMainMenu() throws IOException {
         StateManager.switchToStartView();
     }
 
