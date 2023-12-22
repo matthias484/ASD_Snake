@@ -2,7 +2,6 @@ package at.ac.fhcampuswien.snake.controller;
 
 import at.ac.fhcampuswien.snake.util.Constants;
 import at.ac.fhcampuswien.snake.util.StateManager;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
@@ -12,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
