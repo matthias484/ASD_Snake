@@ -36,6 +36,10 @@ public class StateManager {
         return scoreBoard;
     }
 
+    private StateManager() {
+
+    }
+
     public static void initializeStage(Stage stage) {
         StateManager.stage = stage;
 
