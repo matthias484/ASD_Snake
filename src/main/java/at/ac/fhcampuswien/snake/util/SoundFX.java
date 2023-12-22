@@ -12,6 +12,10 @@ public class SoundFX {
     private final static String EATING_SOUND = "/sounds/eat.mp3";
     private final static String GAME_OVER_SOUND = "/sounds/game-over.wav";
 
+    private SoundFX() {
+
+    }
+
     public static void playIntroSound() {
         playSoundFx(INTRO_SOUND);
     }
