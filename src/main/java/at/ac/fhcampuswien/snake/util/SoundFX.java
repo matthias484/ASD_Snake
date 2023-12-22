@@ -38,12 +38,15 @@ public class SoundFX {
 
     private static void playSoundFx(String resourcePath) {
         try {
-            String path = Objects.requireNonNull(SoundFX.class.getResource(resourcePath)).toURI().toString();
-            AudioClip audioClip = new AudioClip(path);
+            AudioClip audioClip = createAudioClip(resourcePath);
             audioClip.play();
-
         } catch (URISyntaxException ex) {
             LOG.error("Error while playing sound", ex);
         }
+    }
+
+    private static AudioClip createAudioClip(String resourcePath) throws URISyntaxException {
+        String path = Objects.requireNonNull(SoundFX.class.getResource(resourcePath)).toURI().toString();
+        return new AudioClip(path);
     }
 }
