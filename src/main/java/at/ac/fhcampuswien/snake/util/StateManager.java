@@ -30,8 +30,6 @@ public class StateManager {
 
     private static ScoreBoard scoreBoard;
 
-    private static HighscoreBoard highscoreBoard;
-
     public static ScoreBoard getScoreBoard() {
         return scoreBoard;
     }
@@ -81,7 +79,7 @@ public class StateManager {
         gameOverController.setScoreTextField(String.valueOf(gameBoard.getScore()));
 
         VBox highScoreVBox = gameOverController.getHighScoreTable();
-        highscoreBoard = new HighscoreBoard(highScoreVBox);
+        new HighscoreBoard(highScoreVBox);
 
         stage.setScene(gameOverScreen);
         stage.show();
