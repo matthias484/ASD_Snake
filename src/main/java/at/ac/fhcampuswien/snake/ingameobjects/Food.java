@@ -40,11 +40,11 @@ public class Food {
     public Food(Snake snake, Wall wall, Food currentlyExistingRegularFood,
                 boolean isSpecialFood, String previousFoodType) {
         int scoreValueMultiplierBasedOnDifficulty;
-        switch (StateManager.difficulty) {
+        switch (StateManager.getDifficulty()) {
             case EASY -> scoreValueMultiplierBasedOnDifficulty = 1;
             case MEDIUM -> scoreValueMultiplierBasedOnDifficulty = 2;
             case HARD -> scoreValueMultiplierBasedOnDifficulty = 3;
-            default -> throw new IllegalStateException("Unexpected value: " + StateManager.difficulty);
+            default -> throw new IllegalStateException("Unexpected value: " + StateManager.getDifficulty());
         }
         if (isSpecialFood) {
             this.isSpecialFood = true;

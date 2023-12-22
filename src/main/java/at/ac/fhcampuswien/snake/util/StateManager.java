@@ -24,16 +24,22 @@ import static at.ac.fhcampuswien.snake.util.Constants.*;
 public class StateManager {
     private static Stage stage = null;
 
-    public static Difficulty difficulty = Difficulty.MEDIUM;
+    private static Difficulty difficulty = Difficulty.MEDIUM;
 
     private static GameBoard gameBoard;
 
     private static ScoreBoard scoreBoard;
 
-    private static HighscoreBoard highscoreBoard;
-
     public static ScoreBoard getScoreBoard() {
         return scoreBoard;
+    }
+
+    public static Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public static void setDifficulty(Difficulty difficulty) {
+        StateManager.difficulty = difficulty;
     }
 
     private StateManager() {
@@ -73,7 +79,7 @@ public class StateManager {
         gameOverController.setScoreTextField(String.valueOf(gameBoard.getScore()));
 
         VBox highScoreVBox = gameOverController.getHighScoreTable();
-        highscoreBoard = new HighscoreBoard(highScoreVBox);
+        new HighscoreBoard(highScoreVBox);
 
         stage.setScene(gameOverScreen);
         stage.show();
