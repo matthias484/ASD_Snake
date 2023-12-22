@@ -79,16 +79,11 @@ public class MainViewController {
         alert.showAndWait();
     }
 
-    @FXML
-    public void onExitButtonClick() {
-        Platform.exit();
-    }
-
     public ImageView getLogo() {
         return this.logo;
     }
 
     public void setStage(Stage stage){
-        this.stage=stage;
+        this.stage = stage;
     }
 }
