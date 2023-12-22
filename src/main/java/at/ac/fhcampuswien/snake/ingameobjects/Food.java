@@ -19,17 +19,17 @@ public class Food {
 
     private int scoreValue;
 
-    private final static int REGULAR_SCORE_VALUE = 1;
-    private final static int SPECIAL_SCORE_VALUE = 3;
+    private static final int REGULAR_SCORE_VALUE = 1;
+    private static final int SPECIAL_SCORE_VALUE = 3;
 
     private int specialFoodTimeToLive;
 
-    private final static String[] REGULAR_FOOD_TYPES = new String[]{"1.png", "2.png", "3.png",
+    private static final String[] REGULAR_FOOD_TYPES = new String[]{"1.png", "2.png", "3.png",
             "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png",
             "11.png", "12.png", "13.png", "14.png", "15.png"};
 
-    private final static String[] SPECIAL_FOOD_TYPES = new String[]{"B1.png", "B2.png",
-            "B3.png", "B4.png", "B5.png", "B6.png"};
+    private static final String[] SPECIAL_FOOD_TYPES = new String[]{"S1.png", "S2.png",
+            "S3.png", "S4.png", "S5.png", "S6.png"};
 
 
     /**
