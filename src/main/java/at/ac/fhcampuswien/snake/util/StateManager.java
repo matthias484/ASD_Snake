@@ -63,13 +63,17 @@ public class StateManager {
 
         startScreen.getStylesheets().add("css/mainView.css");
 
-        ImageView logo = mainViewController.getLogo();
-
-        logo.fitWidthProperty().bind(stage.widthProperty());
+        setupLogo(mainViewController);
 
         stage.setScene(startScreen);
         stage.show();
     }
+
+    private static void setupLogo(MainViewController mainViewController) {
+        ImageView logo = mainViewController.getLogo();
+        logo.fitWidthProperty().bind(stage.widthProperty());
+    }
+
     public static void switchToGameOverView() throws IOException {
         stopGameIfRunning();
 
