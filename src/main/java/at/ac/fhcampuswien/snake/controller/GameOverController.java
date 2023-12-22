@@ -16,7 +16,6 @@ public class GameOverController {
     @FXML
     private VBox highScoreTable;
 
-
     public void playNewGame() throws IOException {
         StateManager.switchToGameView();
     }
@@ -25,11 +24,9 @@ public class GameOverController {
         StateManager.switchToStartView();
     }
 
-
     public void setScoreTextField(String score) {
         this.scoreTextField.setText(score);
     }
-
 
     public VBox getHighScoreTable() {
         return highScoreTable;

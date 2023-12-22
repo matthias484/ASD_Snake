@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.snake.ingameobjects;
 
+import at.ac.fhcampuswien.snake.util.Constants;
 import at.ac.fhcampuswien.snake.util.SoundFX;
 
 import java.util.ArrayList;
@@ -16,9 +17,10 @@ public class Snake {
     private Direction direction;
     private final List<Position> segments = new ArrayList<>();
 
+
     public Snake(int initialSize, Direction initialDirection) {
         int initialLength = 0;
-        Position initialPosition = new Position(GAME_BOARD_SIZE_MEDIUM / 2, GAME_BOARD_SIZE_MEDIUM / 2);
+        Position initialPosition = new Position(GAME_BOARD_SIZE_MEDIUM / getCenterOfScreen, GAME_BOARD_SIZE_MEDIUM / getCenterOfScreen);
 
         switch (initialDirection) {
             case UP -> {
