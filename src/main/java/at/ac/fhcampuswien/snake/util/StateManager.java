@@ -98,18 +98,23 @@ public class StateManager {
     }
 
     public static void switchToGameView() throws IOException {
-        FXMLLoader gameBoardViewFxmlLoader = new FXMLLoader(SnakeApp.class.getResource("game-view.fxml"));
+        FXMLLoader gameBoardViewFxmlLoader = loadFXML("game-view.fxml");
         Scene gameScreen = new Scene(gameBoardViewFxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         GameViewController gameViewController = gameBoardViewFxmlLoader.getController();
         gameViewController.setStage(stage);
         stage.setScene(gameScreen);
+
+        setupGameBoardAndScoreBoard(gameViewController);
+
+        stage.setOnCloseRequest(event -> gameBoard.stopAnimation());
+    }
+
+    private static void setupGameBoardAndScoreBoard(GameViewController gameViewController) {
         Canvas gameBoardCanvas = gameViewController.getGameBoardCanvas();
         Canvas scoreBoardCanvas = gameViewController.getScoreBoardCanvas();
         scoreBoard = new ScoreBoard(scoreBoardCanvas);
         gameBoard = new GameBoard(gameBoardCanvas, difficulty);
         gameBoard.startGame();
-
-        stage.setOnCloseRequest(event -> gameBoard.stopAnimation());
     }
 
     private static void stopGameIfRunning() {
