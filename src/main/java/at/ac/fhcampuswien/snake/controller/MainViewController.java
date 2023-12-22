@@ -19,8 +19,6 @@ import java.io.IOException;
 
 public class MainViewController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MainViewController.class);
-
     protected Stage stage = null;
     @FXML
     private Label textBox;
