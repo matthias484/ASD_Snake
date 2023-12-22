@@ -56,9 +56,9 @@ public class MainViewController {
     public void startGame() throws IOException {
         String difficulty = comboBox.getValue().toString();
         switch (difficulty) {
-            case "Easy" -> StateManager.difficulty = Constants.Difficulty.EASY;
-            case "Medium" -> StateManager.difficulty = Constants.Difficulty.MEDIUM;
-            case "Hard" -> StateManager.difficulty = Constants.Difficulty.HARD;
+            case "Easy" -> StateManager.setDifficulty(Constants.Difficulty.EASY);
+            case "Medium" -> StateManager.setDifficulty(Constants.Difficulty.MEDIUM);
+            case "Hard" -> StateManager.setDifficulty(Constants.Difficulty.HARD);
         }
         StateManager.switchToGameView();
     }

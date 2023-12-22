@@ -24,7 +24,7 @@ import static at.ac.fhcampuswien.snake.util.Constants.*;
 public class StateManager {
     private static Stage stage = null;
 
-    public static Difficulty difficulty = Difficulty.MEDIUM;
+    private static Difficulty difficulty = Difficulty.MEDIUM;
 
     private static GameBoard gameBoard;
 
@@ -34,6 +34,14 @@ public class StateManager {
 
     public static ScoreBoard getScoreBoard() {
         return scoreBoard;
+    }
+
+    public static Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public static void setDifficulty(Difficulty difficulty) {
+        StateManager.difficulty = difficulty;
     }
 
     private StateManager() {
