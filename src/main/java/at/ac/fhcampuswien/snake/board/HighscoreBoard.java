@@ -12,42 +12,61 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_BOARD_HEIGHT;
-import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_BOARD_WIDTH;
-import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_BOARD_NAME_COL_WIDTH;
-import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_BOARD_SCORE_COL_WIDTH;
+import static at.ac.fhcampuswien.snake.util.Constants.*;
 
 public class HighscoreBoard {
 
+    private VBox vBox;
+    private TableView<Player> table;
+
     public HighscoreBoard(VBox vBox) {
-        TableView<Player> table = new TableView<>();
+        this.vBox = vBox;
+        initializeVBox();
+        createTable();
+        configureColumns();
+        loadDataIntoTable();
+    }
+
+    // Refactor: Extract Method for VBox initialization
+    private void initializeVBox() {
         vBox.setMaxHeight(HIGHSCORE_BOARD_HEIGHT);
         vBox.setMaxWidth(HIGHSCORE_BOARD_WIDTH);
-
-        TableColumn<Player, String> nameCol = new TableColumn<>("Name");
-        nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameCol.setMinWidth(HIGHSCORE_BOARD_NAME_COL_WIDTH);
-        nameCol.setSortable(false);
-        nameCol.setReorderable(false);
-
-        TableColumn<Player, String> scoreCol = new TableColumn<>("Score");
-        scoreCol.setCellValueFactory(new PropertyValueFactory<>("score"));
-        scoreCol.setMinWidth((HIGHSCORE_BOARD_SCORE_COL_WIDTH));
-        scoreCol.setSortable(false);
-        scoreCol.setReorderable(false);
-
         vBox.setSpacing(5);
         vBox.setPadding(new Insets(10, 10, 10, 10));
-        vBox.getChildren().addAll(table);
+    }
 
-        final List<Player> playerList = HighScoreService.getSavedPlayerList();
-        final ObservableList<Player> data = FXCollections.observableArrayList(playerList);
+    // Refactor: Extract Method for table creation
+    private void createTable() {
+        table = new TableView<>();
+        vBox.getChildren().add(table);
+    }
 
-        nameCol.setStyle("-fx-alignment: CENTER;");
-        scoreCol.setStyle("-fx-alignment: CENTER;");
-
-        table.setItems(data);
+    // Refactor: Extract Method for configuring columns
+    private void configureColumns() {
+        TableColumn<Player, String> nameCol = createColumn("Name", "name", HIGHSCORE_BOARD_NAME_COL_WIDTH);
+        TableColumn<Player, String> scoreCol = createColumn("Score", "score", HIGHSCORE_BOARD_SCORE_COL_WIDTH);
         table.getColumns().addAll(nameCol, scoreCol);
+    }
 
+    // Refactor: Extract Method for creating a TableColumn
+    private TableColumn<Player, String> createColumn(String title, String property, double width) {
+        TableColumn<Player, String> column = new TableColumn<>(title);
+        column.setCellValueFactory(new PropertyValueFactory<>(property));
+        column.setMinWidth(width);
+        column.setSortable(false);
+        column.setReorderable(false);
+        column.setStyle("-fx-alignment: CENTER;");
+        return column;
+    }
+
+    // Refactor: Extract Method for loading data into table
+    private void loadDataIntoTable() {
+        try {
+            List<Player> playerList = HighScoreService.getSavedPlayerList();
+            ObservableList<Player> data = FXCollections.observableArrayList(playerList);
+            table.setItems(data);
+        } catch (Exception e) {
+            // Handle exceptions, e.g., log them or show an error message
+        }
     }
 }
