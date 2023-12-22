@@ -56,7 +56,7 @@ public class StateManager {
     public static void switchToStartView() throws IOException {
         stopGameIfRunning();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(SnakeApp.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = loadFXML("main-view.fxml");
         Scene startScreen = new Scene(fxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         MainViewController mainViewController = fxmlLoader.getController();
         mainViewController.setStage(stage);
@@ -77,16 +77,24 @@ public class StateManager {
     public static void switchToGameOverView() throws IOException {
         stopGameIfRunning();
 
-        FXMLLoader gameOverViewFxmlLoader = new FXMLLoader(SnakeApp.class.getResource("gameover-view.fxml"));
+        FXMLLoader gameOverViewFxmlLoader = loadFXML("gameover-view.fxml");
         Scene gameOverScreen = new Scene(gameOverViewFxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         GameOverController gameOverController = gameOverViewFxmlLoader.getController();
         gameOverController.setScoreTextField(String.valueOf(gameBoard.getScore()));
 
-        VBox highScoreVBox = gameOverController.getHighScoreTable();
-        new HighscoreBoard(highScoreVBox);
+        setupHighscoreBoard(gameOverController);
 
         stage.setScene(gameOverScreen);
         stage.show();
+    }
+
+    private static FXMLLoader loadFXML(String fxml) {
+        return new FXMLLoader(SnakeApp.class.getResource(fxml));
+    }
+
+    private static void setupHighscoreBoard(GameOverController gameOverController) {
+        VBox highScoreVBox = gameOverController.getHighScoreTable();
+        new HighscoreBoard(highScoreVBox);
     }
 
     public static void switchToGameView() throws IOException {
