@@ -25,7 +25,7 @@ public class ScoreBoard {
         gc.setTextBaseline(VPos.CENTER);
         this.gc.setFill(Color.WHITE);
         this.gc.setFont(Font.font("Courier", OBJECT_SIZE_MEDIUM));
-        this.gc.fillText("Score: " + score, SCOREBOARD_WIDTH - 7, SCOREBOARD_HEIGHT / 2);
+        this.gc.fillText("Score: " + score, SCOREBOARD_WIDTH - 7, SCOREBOARD_HEIGHT / CENTER_OF_SCREEN_DIVIDER);
     }
 
     public void drawCountdownTimer() {
@@ -37,7 +37,7 @@ public class ScoreBoard {
                 int finalI = i;
                 Platform.runLater(() -> {
                     this.gc.setFill(Color.web("4a148c"));
-                    this.gc.fillRect(0, 0, SCOREBOARD_WIDTH / 2, SCOREBOARD_HEIGHT);
+                    this.gc.fillRect(0, 0, SCOREBOARD_WIDTH / CENTER_OF_SCREEN_DIVIDER, SCOREBOARD_HEIGHT);
                     if (finalI > 0) {
                         this.gc.setTextAlign(TextAlignment.LEFT);
                         this.gc.setTextBaseline(VPos.CENTER);
@@ -45,7 +45,7 @@ public class ScoreBoard {
                         this.gc.setFont(Font.font("Courier", OBJECT_SIZE_MEDIUM));
 
                         timerText.setText("Starting in: " + finalI);
-                        this.gc.fillText(timerText.getText(), 7, SCOREBOARD_HEIGHT / 2);
+                        this.gc.fillText(timerText.getText(), 7, SCOREBOARD_HEIGHT / CENTER_OF_SCREEN_DIVIDER);
                     }
                 });
                 try {

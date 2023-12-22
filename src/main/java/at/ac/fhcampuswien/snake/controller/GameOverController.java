@@ -16,20 +16,17 @@ public class GameOverController {
     @FXML
     private VBox highScoreTable;
 
-
-    public void playNewGame(ActionEvent actionEvent) throws IOException {
+    public void playNewGame() throws IOException {
         StateManager.switchToGameView();
     }
 
-    public void goToMainMenu(ActionEvent actionEvent) throws IOException {
+    public void goToMainMenu() throws IOException {
         StateManager.switchToStartView();
     }
-
 
     public void setScoreTextField(String score) {
         this.scoreTextField.setText(score);
     }
-
 
     public VBox getHighScoreTable() {
         return highScoreTable;

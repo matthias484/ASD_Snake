@@ -1,20 +1,5 @@
 package at.ac.fhcampuswien.snake.ingameobjects;
 
-public class Position {
+public record Position(int x, int y) {
 
-    private int x;
-    private int y;
-
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
 }

@@ -24,16 +24,26 @@ import static at.ac.fhcampuswien.snake.util.Constants.*;
 public class StateManager {
     private static Stage stage = null;
 
-    public static Difficulty difficulty = Difficulty.MEDIUM;
+    private static Difficulty difficulty = Difficulty.MEDIUM;
 
     private static GameBoard gameBoard;
 
     private static ScoreBoard scoreBoard;
 
-    private static HighscoreBoard highscoreBoard;
-
     public static ScoreBoard getScoreBoard() {
         return scoreBoard;
+    }
+
+    public static Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public static void setDifficulty(Difficulty difficulty) {
+        StateManager.difficulty = difficulty;
+    }
+
+    private StateManager() {
+
     }
 
     public static void initializeStage(Stage stage) {
@@ -46,48 +56,65 @@ public class StateManager {
     public static void switchToStartView() throws IOException {
         stopGameIfRunning();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(SnakeApp.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = loadFXML("main-view.fxml");
         Scene startScreen = new Scene(fxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         MainViewController mainViewController = fxmlLoader.getController();
         mainViewController.setStage(stage);
 
         startScreen.getStylesheets().add("css/mainView.css");
 
-        ImageView logo = mainViewController.getLogo();
-
-        logo.fitWidthProperty().bind(stage.widthProperty());
+        setupLogo(mainViewController);
 
         stage.setScene(startScreen);
         stage.show();
     }
+
+    private static void setupLogo(MainViewController mainViewController) {
+        ImageView logo = mainViewController.getLogo();
+        logo.fitWidthProperty().bind(stage.widthProperty());
+    }
+
     public static void switchToGameOverView() throws IOException {
         stopGameIfRunning();
 
-        FXMLLoader gameOverViewFxmlLoader = new FXMLLoader(SnakeApp.class.getResource("gameover-view.fxml"));
+        FXMLLoader gameOverViewFxmlLoader = loadFXML("gameover-view.fxml");
         Scene gameOverScreen = new Scene(gameOverViewFxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         GameOverController gameOverController = gameOverViewFxmlLoader.getController();
         gameOverController.setScoreTextField(String.valueOf(gameBoard.getScore()));
 
-        VBox highScoreVBox = gameOverController.getHighScoreTable();
-        highscoreBoard = new HighscoreBoard(highScoreVBox);
+        setupHighscoreBoard(gameOverController);
 
         stage.setScene(gameOverScreen);
         stage.show();
     }
 
+    private static FXMLLoader loadFXML(String fxml) {
+        return new FXMLLoader(SnakeApp.class.getResource(fxml));
+    }
+
+    private static void setupHighscoreBoard(GameOverController gameOverController) {
+        VBox highScoreVBox = gameOverController.getHighScoreTable();
+        new HighscoreBoard(highScoreVBox);
+    }
+
     public static void switchToGameView() throws IOException {
-        FXMLLoader gameBoardViewFxmlLoader = new FXMLLoader(SnakeApp.class.getResource("game-view.fxml"));
+        FXMLLoader gameBoardViewFxmlLoader = loadFXML("game-view.fxml");
         Scene gameScreen = new Scene(gameBoardViewFxmlLoader.load(), APP_WIDTH_MEDIUM, APP_HEIGHT_MEDIUM);
         GameViewController gameViewController = gameBoardViewFxmlLoader.getController();
         gameViewController.setStage(stage);
         stage.setScene(gameScreen);
+
+        setupGameBoardAndScoreBoard(gameViewController);
+
+        stage.setOnCloseRequest(event -> gameBoard.stopAnimation());
+    }
+
+    private static void setupGameBoardAndScoreBoard(GameViewController gameViewController) {
         Canvas gameBoardCanvas = gameViewController.getGameBoardCanvas();
         Canvas scoreBoardCanvas = gameViewController.getScoreBoardCanvas();
         scoreBoard = new ScoreBoard(scoreBoardCanvas);
         gameBoard = new GameBoard(gameBoardCanvas, difficulty);
         gameBoard.startGame();
-
-        stage.setOnCloseRequest(event -> gameBoard.stopAnimation());
     }
 
     private static void stopGameIfRunning() {
