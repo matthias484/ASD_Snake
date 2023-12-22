@@ -19,7 +19,7 @@ public class Snake {
 
     public Snake(int initialSize, Direction initialDirection) {
         int initialLength = 0;
-        Position initialPosition = new Position(GAME_BOARD_SIZE_MEDIUM / getCenterOfScreen, GAME_BOARD_SIZE_MEDIUM / getCenterOfScreen);
+        Position initialPosition = new Position(GAME_BOARD_SIZE_MEDIUM / CENTER_OF_SCREEN_DIVIDER, GAME_BOARD_SIZE_MEDIUM / CENTER_OF_SCREEN_DIVIDER);
 
         switch (initialDirection) {
             case UP -> {

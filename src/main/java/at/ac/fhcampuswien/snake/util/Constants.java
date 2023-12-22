@@ -14,7 +14,7 @@ public class Constants {
     public static final int OBJECT_SIZE_MEDIUM = GAME_BOARD_SIZE_MEDIUM / NUMBER_OF_ROWS_AND_COLS;
     public static final String GAMEBOARD_COLOR_LIGHT = "FFCC66";
     public static final String GAMEBOARD_COLOR_DARK = "CC9933";
-    public static final int getCenterOfScreen = 2;
+    public static final int CENTER_OF_SCREEN_DIVIDER = 2;
 
     // Scoreboard constants
     public static final int SCOREBOARD_FACTOR = 15;
