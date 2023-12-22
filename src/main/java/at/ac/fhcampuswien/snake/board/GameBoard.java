@@ -230,9 +230,9 @@ public class GameBoard {
         int segmentPosition;
         for (Position segment : snake.getSegments()) {
             if (isHorizontal) {
-                segmentPosition = segment.getX();
+                segmentPosition = segment.x();
             } else {
-                segmentPosition = segment.getY();
+                segmentPosition = segment.y();
             }
             exclusions.add(segmentPosition);
             for (int i = 0; i < wallLength; i++) {
@@ -272,7 +272,7 @@ public class GameBoard {
 
     private void drawFood(GraphicsContext gc, Food food) {
         Image foodImg = new Image("graphics/food/" + food.getFoodType());
-        gc.drawImage(foodImg, food.getLocation().getX(), food.getLocation().getY(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
+        gc.drawImage(foodImg, food.getLocation().x(), food.getLocation().y(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
     }
 
     private void drawSnake(GraphicsContext gc) {
@@ -286,17 +286,17 @@ public class GameBoard {
             case LEFT -> head = snakeHeadLeft;
         }
 
-        gc.drawImage(head, headPosition.getX(), headPosition.getY(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
+        gc.drawImage(head, headPosition.x(), headPosition.y(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
 
         for (int i = 1; i < snake.getSegments().size(); i++) {
             Position bodySegment = snake.getSegments().get(i);
-            gc.drawImage(snakeBody, bodySegment.getX(), bodySegment.getY(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
+            gc.drawImage(snakeBody, bodySegment.x(), bodySegment.y(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
         }
     }
 
     private boolean checkIfSnakeHeadIsOnFood(Food food) {
-        return (snake.getSegments().get(0).getX() == food.getLocation().getX() &&
-                snake.getSegments().get(0).getY() == food.getLocation().getY());
+        return (snake.getSegments().get(0).x() == food.getLocation().x() &&
+                snake.getSegments().get(0).y() == food.getLocation().y());
     }
 
     /**
@@ -343,7 +343,7 @@ public class GameBoard {
     private void drawInnerWalls(GraphicsContext gc) {
         for (int i = 0; i < innerWall.getSegments().size(); i++) {
             Position wallSegment = innerWall.getSegments().get(i);
-            gc.drawImage(wallPattern, wallSegment.getX(), wallSegment.getY(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
+            gc.drawImage(wallPattern, wallSegment.x(), wallSegment.y(), OBJECT_SIZE_MEDIUM, OBJECT_SIZE_MEDIUM);
         }
     }
 

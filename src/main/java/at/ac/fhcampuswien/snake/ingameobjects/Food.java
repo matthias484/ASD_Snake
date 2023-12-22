@@ -16,12 +16,12 @@ public class Food {
     private static final int REGULAR_SCORE_VALUE = 1;
     private static final int SPECIAL_SCORE_VALUE = 3;
 
-    private static final String[] REGULAR_FOOD_TYPES = new String[]{"1.png", "2.png", "3.png",
-            "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png",
-            "11.png", "12.png", "13.png", "14.png", "15.png"};
+    private static final String[] REGULAR_FOOD_TYPES = new String[]{"strawberry.png", "watermelon.png", "bell_pepper.png",
+            "kiwi.png", "orange.png", "tomato.png", "cherry.png", "green_grapes.png", "coconut.png", "melon.png",
+            "peach.png", "blue_grapes.png", "blueberries.png", "banana.png", "chili_pepper.png"};
 
-    private static final String[] SPECIAL_FOOD_TYPES = new String[]{"S1.png", "S2.png",
-            "S3.png", "S4.png", "S5.png", "S6.png"};
+    private static final String[] SPECIAL_FOOD_TYPES = new String[]{"special_food_1.png", "special_food_2.png",
+            "special_food_3.png", "special_food_4.png", "special_food_5.png", "special_food_6.png"};
 
 
 
@@ -78,8 +78,8 @@ public class Food {
             // Check if calculated Position is inhibited by the snake
             int i = 0;
             do {
-                if (snake.getSegments().get(i).getX() == foodXCoord &&
-                        snake.getSegments().get(i).getY() == foodYCoord) isTargetFieldFree = false;
+                if (snake.getSegments().get(i).x() == foodXCoord &&
+                        snake.getSegments().get(i).y() == foodYCoord) isTargetFieldFree = false;
                 i++;
             } while (isTargetFieldFree && i < snake.getSegments().size());
 
@@ -87,8 +87,8 @@ public class Food {
             if (wall != null && isTargetFieldFree) {
                 int j = 0;
                 do {
-                    if (wall.getSegments().get(j).getX() == foodXCoord &&
-                            wall.getSegments().get(j).getY() == foodYCoord) isTargetFieldFree = false;
+                    if (wall.getSegments().get(j).x() == foodXCoord &&
+                            wall.getSegments().get(j).y() == foodYCoord) isTargetFieldFree = false;
                     j++;
                 } while (isTargetFieldFree && j < wall.getSegments().size());
             }
@@ -96,7 +96,7 @@ public class Food {
             // Check if currently existing regular Food is on desired Position
             if (isSpecialFood && currentlyExistingRegularFood != null && isTargetFieldFree) {
                 Position existingFoodPos = currentlyExistingRegularFood.getLocation();
-                if (existingFoodPos.getX() == foodXCoord && existingFoodPos.getY() == foodYCoord) {
+                if (existingFoodPos.x() == foodXCoord && existingFoodPos.y() == foodYCoord) {
                     isTargetFieldFree = false;
                 }
             }
