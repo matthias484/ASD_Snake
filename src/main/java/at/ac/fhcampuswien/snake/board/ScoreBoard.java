@@ -45,7 +45,7 @@ public class ScoreBoard {
                         this.gc.setFont(Font.font("Courier", OBJECT_SIZE_MEDIUM));
 
                         timerText.setText("Starting in: " + finalI);
-                        this.gc.fillText(timerText.getText(), 7, SCOREBOARD_HEIGHT / 2);
+                        this.gc.fillText(timerText.getText(), 7, SCOREBOARD_HEIGHT / CENTER_OF_SCREEN_DIVIDER);
                     }
                 });
                 try {
