@@ -26,6 +26,9 @@ dependencies {
     testImplementation 'net.bytebuddy:byte-buddy:1.11.22' // Add Byte Buddy
     testImplementation 'net.bytebuddy:byte-buddy-agent:1.11.22' // Add Byte Buddy Agent
 
+    testImplementation 'org.assertj:assertj-core:3.21.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.8.0'
+    testImplementation 'org.mockito:mockito-inline:5.2.0'
 }
 
 group = 'at.ac.fhcampuswien.snake'
