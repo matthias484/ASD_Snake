@@ -19,6 +19,13 @@ public class Wall {
      * @param length            The length of the wall
      */
     public Wall(boolean isHorizontal, int startingPositionX, int startingPositionY, int length) {
+        if (length <= 0) {
+            throw new IllegalArgumentException("Length must be greater than 0");
+        }
+        if (startingPositionX <= 0 || startingPositionY <= 0) {
+            throw new IllegalArgumentException("Starting position must be greater than 0");
+        }
+
         if (isHorizontal) {
             for (int i = 0; i < length; i++) {
                 segments.add(new Position(startingPositionX + i * OBJECT_SIZE_MEDIUM, startingPositionY));
