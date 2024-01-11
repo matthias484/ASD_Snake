@@ -40,7 +40,7 @@ public class HighscoreBoard {
         vBox.setPadding(new Insets(10, 10, 10, 10));
         vBox.getChildren().addAll(table);
 
-        final List<Player> playerList = HighScoreService.getSavedPlayerList();
+        final List<Player> playerList = HighScoreService.getSavedPlayerList("src/main/resources/highScores.txt");
         final ObservableList<Player> data = FXCollections.observableArrayList(playerList);
 
         nameCol.setStyle("-fx-alignment: CENTER;");

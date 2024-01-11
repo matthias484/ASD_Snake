@@ -429,7 +429,7 @@ public class GameBoard {
         }
 
         Player player = new Player(name, score);
-        HighScoreService.savePlayerHighScore(player);
+        HighScoreService.savePlayerHighScore(player, "src/main/resources/highScores.txt");
     }
 
     /**

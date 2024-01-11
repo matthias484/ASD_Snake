@@ -34,8 +34,7 @@ public class HighScoreService {
      * @return A File object that represents the high scores file.
      * @throws IOException if an I/O error occurs when creating the high scores file.
      */
-    private static File getHighScoresFile() throws IOException {
-        String path = "src/main/resources/highScores.txt";
+    private static File getHighScoresFile(String path) throws IOException {
         File highScoreFile = new File(path);
         if (!highScoreFile.exists()) {
             createHighScoresFile(highScoreFile);
@@ -97,10 +96,10 @@ public class HighScoreService {
      * @return A list of Player objects representing the saved players.
      *         Returns null if an I/O error occurs when reading the file content.
      */
-    public static List<Player> getSavedPlayerList() {
+    public static List<Player> getSavedPlayerList(String path) {
         List<Player> savedPlayerList = null;
         try {
-            File highScoreFile = getHighScoresFile();
+            File highScoreFile = getHighScoresFile(path);
             List<String> fileContent = getFileContent(highScoreFile);
             savedPlayerList = getPlayerFromList(fileContent);
         } catch (IOException ex) {
@@ -118,9 +117,9 @@ public class HighScoreService {
      *
      * @param currentPlayer The current player whose high score is to be saved.
      */
-    public static void savePlayerHighScore(Player currentPlayer) {
+    public static void savePlayerHighScore(Player currentPlayer, String path) {
         try {
-            File highscoreFile = getHighScoresFile();
+            File highscoreFile = getHighScoresFile(path);
             List<String> fileContent = getFileContent(highscoreFile);
             List<Player> players = getPlayerFromList(fileContent);
 
