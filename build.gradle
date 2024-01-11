@@ -21,6 +21,11 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
 
+    // Mockito dependencies
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+    testImplementation 'net.bytebuddy:byte-buddy:1.11.22' // Add Byte Buddy
+    testImplementation 'net.bytebuddy:byte-buddy-agent:1.11.22' // Add Byte Buddy Agent
+
 }
 
 group = 'at.ac.fhcampuswien.snake'

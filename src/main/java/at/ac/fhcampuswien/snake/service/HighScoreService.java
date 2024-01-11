@@ -23,7 +23,7 @@ public class HighScoreService {
     /**
      * Private constructor to hide the implicit public one.
      */
-    private HighScoreService() {
+    HighScoreService(File fileMock) {
 
     }
 
@@ -34,7 +34,7 @@ public class HighScoreService {
      * @return A File object that represents the high scores file.
      * @throws IOException if an I/O error occurs when creating the high scores file.
      */
-    private static File getHighScoresFile() throws IOException {
+    static File getHighScoresFile() throws IOException {
         String path = "src/main/resources/highScores.txt";
         File highScoreFile = new File(path);
         if (!highScoreFile.exists()) {
@@ -50,7 +50,7 @@ public class HighScoreService {
      * @param highScoreFile A File object representing the high scores file to be created.
      * @throws IOException if the file cannot be created.
      */
-    private static void createHighScoresFile(File highScoreFile) throws IOException {
+    static void createHighScoresFile(File highScoreFile) throws IOException {
         boolean fileCreated = highScoreFile.createNewFile();
         if (!fileCreated) {
             throw new IOException("Could not create new high score file.");
@@ -64,7 +64,7 @@ public class HighScoreService {
      * @return List of strings where each string represents a line in the file.
      * @throws IOException if an I/O error occurs when reading the file content.
      */
-    private static List<String> getFileContent(File file) throws IOException {
+    static List<String> getFileContent(File file) throws IOException {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {
