@@ -87,8 +87,7 @@ public class Food {
             if (wall != null && isTargetFieldFree) {
                 int j = 0;
                 do {
-                    if (wall.getSegments().get(j).x() == foodXCoord &&
-                            wall.getSegments().get(j).y() == foodYCoord) isTargetFieldFree = false;
+                    if (wall.getSegments().get(j).x() == foodXCoord && wall.getSegments().get(j).y() == foodYCoord) isTargetFieldFree = false;
                     j++;
                 } while (isTargetFieldFree && j < wall.getSegments().size());
             }

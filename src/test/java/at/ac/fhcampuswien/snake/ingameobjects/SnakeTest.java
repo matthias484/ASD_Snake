@@ -34,12 +34,11 @@ class SnakeTest {
     @Test
     void snakeInitialAlive() {
         // Arrange & Act
-        boolean expectedAlive = true;
         Snake snake = new Snake(3, Constants.Direction.RIGHT);
         boolean actualAlive = snake.isAlive();
 
         // Assert
-        assertEquals(expectedAlive, actualAlive);
+        assertTrue(actualAlive);
     }
 
     @ParameterizedTest
@@ -60,12 +59,15 @@ class SnakeTest {
     }
 
     @Test
-    void snakeCheckForCollisionsWithWall() {
+    void snakeCheckForNoCollisionsWithWall() {
         // Arrange
         Snake snake = new Snake(3, Constants.Direction.RIGHT);
         Wall wall = new Wall(true, 1, 1, 3);
 
         // Act
+        for (int i = 0; i < 5; i++) {
+            snake.updateSnakePosition();
+        }
         snake.checkForCollisions(wall);
 
         // Assert
@@ -129,5 +131,31 @@ class SnakeTest {
 
         // Assert
         assertFalse(snake.isAlive());
+    }
+
+    @Test
+    void setPositionUpdatedTrue() {
+        // Arrange
+        Snake snake = new Snake(3, Constants.Direction.RIGHT);
+
+        // Act
+        snake.setPositionUpdated(true);
+        boolean actual = snake.isPositionUpdated();
+
+        // Assert
+        assertTrue(actual);
+    }
+
+    @Test
+    void setPositionUpdatedFalse() {
+        // Arrange
+        Snake snake = new Snake(3, Constants.Direction.RIGHT);
+
+        // Act
+        snake.setPositionUpdated(false);
+        boolean actual = snake.isPositionUpdated();
+
+        // Assert
+        assertFalse(actual);
     }
 }
