@@ -49,4 +49,14 @@ class PlayerTest {
         // Assert
         assertEquals(expected, actual);
     }
+
+    @Test
+    void hashCodeEquals() {
+        // Arrange
+        Player player1 = new Player("John Doe", 100);
+        Player player2 = new Player("John Doe", 100);
+
+        // Act & Assert
+        assertEquals(player1.hashCode(), player2.hashCode());
+    }
 }
