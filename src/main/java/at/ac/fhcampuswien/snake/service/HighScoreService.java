@@ -18,13 +18,11 @@ import static at.ac.fhcampuswien.snake.util.Constants.HIGHSCORE_SEPARATOR;
  */
 public class HighScoreService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(HighScoreService.class);
+    private static Logger LOG = LoggerFactory.getLogger(HighScoreService.class);
 
-    /**
-     * Private constructor to hide the implicit public one.
-     */
-    private HighScoreService() {
-
+    // Package-private constructor for testing
+    HighScoreService(Logger log) {
+        LOG = log;
     }
 
     /**
@@ -64,12 +62,7 @@ public class HighScoreService {
      * @throws IOException if an I/O error occurs when reading the file content.
      */
     private static List<String> getFileContent(File file) throws IOException {
-        try {
-            return Files.readAllLines(file.toPath());
-        } catch (IOException e) {
-            LOG.error("Error reading the file content");
-            throw new IOException(e);
-        }
+        return Files.readAllLines(file.toPath());
     }
 
     /**
@@ -153,6 +146,6 @@ public class HighScoreService {
      * @return A Comparator for Player objects.
      */
     private static Comparator<Player> sortByScoreDescending() {
-        return Comparator.comparingInt(Player::getScore).reversed();
+        return Comparator.comparingInt(Player::score).reversed();
     }
 }
