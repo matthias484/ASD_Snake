@@ -36,4 +36,17 @@ class PlayerTest {
         // Assert
         assertEquals(expectedHighScoreString, actualHighScoreString);
     }
+
+    @Test
+    void toString_returnsExpectedFormat() {
+        // Arrange
+        String expected = "Player{name=John Doe, score=100}";
+        Player player = new Player("John Doe", 100);
+
+        // Act
+        String actual = player.toString();
+
+        // Assert
+        assertEquals(expected, actual);
+    }
 }
