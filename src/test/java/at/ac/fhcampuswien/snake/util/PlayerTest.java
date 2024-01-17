@@ -14,8 +14,8 @@ class PlayerTest {
 
         // Act
         Player player = new Player(expectedPlayerName, expectedPlayerScore);
-        String actualPlayerName = player.name();
-        int actualPlayerScore = player.score();
+        String actualPlayerName = player.getName();
+        int actualPlayerScore = player.getScore();
 
         // Assert
         assertEquals(expectedPlayerName, actualPlayerName);

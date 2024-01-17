@@ -146,6 +146,6 @@ public class HighScoreService {
      * @return A Comparator for Player objects.
      */
     private static Comparator<Player> sortByScoreDescending() {
-        return Comparator.comparingInt(Player::score).reversed();
+        return Comparator.comparingInt(Player::getScore).reversed();
     }
 }
